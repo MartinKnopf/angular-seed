@@ -19,8 +19,9 @@ With Node and npm ready you can install the following:
     $ npm install protractor -g               # for e2e tests based on Selenium WebDriverJS
     $ webdriver-manager update --standalone   # downloads the selenium server and chromedriver
 
-Move into the project folder and execute this to install backend and frontend libs:
+Now clone this repository or [download](https://github.com/Horsed/angular-seed/archive/master.zip) the zip and install it:
 
+    $ cd angular-seed/
     $ npm install
 
 ## Development environment

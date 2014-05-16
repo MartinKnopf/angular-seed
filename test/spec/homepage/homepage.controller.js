@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: HomepageCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('ngtestApp'));
+  beforeEach(module('myApp.homepage'));
 
-  var MainCtrl,
+  var HomepageCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    HomepageCtrl = $controller('HomepageCtrl', {
       $scope: scope
     });
   }));

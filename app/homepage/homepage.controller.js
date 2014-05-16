@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ngtestApp')
-  .controller('MainCtrl', function ($scope) {
+angular.module('myApp.homepage')
+  .controller('HomepageCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

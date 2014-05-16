@@ -22,7 +22,7 @@ With Node and npm ready you can install the following:
 Now clone this repository or [download](https://github.com/Horsed/angular-seed/archive/master.zip) the zip and install it:
 
     $ cd angular-seed/
-    $ npm install
+    $ npm install                             # installs frontend and backend dependencies
 
 ## Development environment
 
@@ -80,6 +80,10 @@ Building this project includes:
 * compress
 
 The built frontend will be writted to ```dist/``` and this folder will be zipped to ```dist.zip```
+
+To take a look at the built project in the browser (again at ```localhost:8080```):
+
+    $ grunt serve:dist
 
 ## Conventions
 

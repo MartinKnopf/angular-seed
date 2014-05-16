@@ -1,11 +1,16 @@
 'use strict';
 
 angular
-  .module('myApp')
+  .module('myApp.homepage', [
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ngRoute'
+  ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'homepage/homepage.html',
+        templateUrl: 'scripts/homepage/homepage.html',
         controller: 'HomepageCtrl'
       })
       .otherwise({

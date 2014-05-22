@@ -1,6 +1,6 @@
 # Project setup
 
-This is a basic [AngularJS](http://angularjs.com) project like the original angular-seed. It was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor) and [grunt-interfake](https://github.com/Horsed/grunt-interfake) added.
+This is a basic [AngularJS](http://angularjs.org) project like the original angular-seed. It was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor) and [grunt-interfake](https://github.com/Horsed/grunt-interfake) added.
 
 ## Installation
 

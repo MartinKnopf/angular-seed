@@ -38,7 +38,8 @@ A proxy will forward all requests to _localhost:8080_ that start with ```/rest/`
 
 ### Unit tests
 
-```grunt test``` executes unit tests with an autowatch (whenever a unit or unit test changes). ```grunt test:singleRun``` runs the unit tests just once.
+```grunt test``` executes unit tests with an autowatch (whenever a unit or unit test changes).
+```grunt test:singleRun``` runs the unit tests just once.
 
 Unit tests are executed with [karma](https://github.com/karma-runner/karma) which is configured to run the tests in [PhantomJS](http://phantomjs.org/). Karma will launch a server at _localhost:7070_.
 

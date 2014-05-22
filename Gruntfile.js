@@ -380,10 +380,8 @@ module.exports = function (grunt) {
       server: [
         'compass:server'
       ],
-      livereload: [
-        'connect:livereload'
-      ],
-      interfake: [
+      watchAndInterfake: [
+        'watch',
         'interfake'
       ],
       test: [
@@ -443,12 +441,10 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'bowerInstall',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
-      'watch',
-      'concurrent:interfake'
+      'concurrent:watchAndInterfake'
     ]);
   });
 

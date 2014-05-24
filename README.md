@@ -1,16 +1,17 @@
 # Project setup
 
-This is a basic [AngularJS](http://angularjs.org) project like the original angular-seed. It was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor) and [grunt-interfake](https://github.com/Horsed/grunt-interfake) added.
+This is a basic [AngularJS](http://angularjs.org) project like the original angular-seed. It was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor), [grunt-interfake](https://github.com/Horsed/grunt-interfake) and [scss-lint](https://github.com/causes/scss-lint) added.
 
 ## Installation
 
 Stuff to install:
 
-* Node.js
-* Python 2.7.x
-* Ruby
-* rubygems
-* compass
+* [Node.js](http://nodejs.org)
+* [Python 2.7.x](https://www.python.org/downloads/)
+* [Ruby](https://www.ruby-lang.org/en/downloads/)
+* [rubygems](https://rubygems.org/)
+* [compass](https://rubygems.org/gems/compass)
+* [scss-lint](https://rubygems.org/gems/scss-lint)
 * On Windows 7: [Microsoft Visual Studio C++ 2012 for Windows Desktop Express](http://go.microsoft.com/?linkid=9816758)
 
 With Node and npm ready you can install the following:
@@ -30,11 +31,7 @@ The frontend can be served by a local webserver that supports livereload. This a
 
 ### Server with livereload and faked backend
 
-```grunt serve``` starts two servers:
-  * a _connect_ server at _localhost:8080_ that serves the static frontend files with livereload capability
-  * a fake backend server at _localhost:9000_ that handles requests defined in _fake-backend.json_
-
-A proxy will forward all requests to _localhost:8080_ that start with ```/rest/``` to the fake backend server. To change this pattern go to _Gruntfile.js_. Note that the fake backend will not be started with livereload.
+```grunt serve``` starts a _connect_ server at _localhost:8080_ that serves the static frontend files with livereload capability. To start it with the fake backend execute ```grunt serve:withFakeBackend```. A proxy will forward all requests going to _localhost:8080_ that start with ```/rest/``` to the fake backend server running at _localhost:9000_. To change this url pattern go to _config/custom-grunt.js_. Note that the fake backend will not be started with livereload capability.
 
 ### Unit tests
 

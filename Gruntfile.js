@@ -58,7 +58,7 @@ module.exports = function (grunt) {
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
-        tasks: ['compass:server', 'autoprefixer']
+        tasks: ['exec:scsslint', 'compass:server', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -372,6 +372,11 @@ module.exports = function (grunt) {
         cmd: function(testConfig) {
           return 'protractor ' + testConfig;
         }
+      },
+      scsslint: {
+        cmd: function() {
+          return 'scss-lint app/styles/** -c scss-lint.yml';
+        }
       }
     },
 
@@ -444,13 +449,9 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
-      'concurrent:watchAndInterfake'
+      'watch'
+      /*'concurrent:watchAndInterfake'*/
     ]);
-  });
-
-  grunt.registerTask('server', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
   });
 
   grunt.registerTask('test', [
@@ -481,6 +482,9 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
+    'newer:jshint',
+    'exec:scsslint',
+    'test',
     'clean:dist',
     'bowerInstall',
     'useminPrepare',
@@ -499,8 +503,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
     'build'
   ]);
 };

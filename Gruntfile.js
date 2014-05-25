@@ -98,7 +98,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9001,
+          port: 32187,
           base: [
             '.tmp',
             'test',
@@ -129,7 +129,7 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/**/*.js'
+        '<%= yeoman.app %>/scripts/**/*.js'
       ],
       test: {
         options: {
@@ -382,21 +382,41 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      server: [
-        'compass:server'
-      ],
-      watchAndInterfake: [
-        'watch',
-        'interfake'
-      ],
-      test: [
-        'compass'
-      ],
-      dist: [
-        'compass:dist',
-        'imagemin',
-        'svgmin'
-      ]
+      server: {
+        tasks: [
+          'compass:server'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      watchAndInterfake: {
+        tasks: [
+          'watch',
+          'interfake'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      test: {
+        tasks: [
+          'compass'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      dist: {
+        tasks: [
+          'compass:dist',
+          'imagemin',
+          'svgmin'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
     },
 
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
@@ -449,8 +469,8 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
-      'watch'
-      /*'concurrent:watchAndInterfake'*/
+      /*'watch',*/
+      'concurrent:watchAndInterfake'
     ]);
   });
 
@@ -484,7 +504,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'newer:jshint',
     'exec:scsslint',
-    'test',
+    'test:single',
     'clean:dist',
     'bowerInstall',
     'useminPrepare',

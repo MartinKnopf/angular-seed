@@ -2,6 +2,11 @@
 
 This is a basic [AngularJS](http://angularjs.org) project like the original angular-seed. It was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor), [grunt-interfake](https://github.com/Horsed/grunt-interfake) and [scss-lint](https://github.com/causes/scss-lint) added.
 
+* fix interfake logging
+* make interfake optional
+* bower doc
+* yeoman doc
+
 ## Installation
 
 Stuff to install:

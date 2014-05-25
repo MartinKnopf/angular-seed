@@ -464,14 +464,16 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
-    grunt.task.run([
+    var tasks = [
       'clean:server',
       'concurrent:server',
       'autoprefixer',
-      'connect:livereload',
-      /*'watch',*/
-      'concurrent:watchAndInterfake'
-    ]);
+      'connect:livereload'
+    ];
+
+    tasks.push(target === 'withFakeBackend' ? 'concurrent:watchAndInterfake' : 'watch');
+
+    return grunt.task.run(tasks);
   });
 
   grunt.registerTask('test', [

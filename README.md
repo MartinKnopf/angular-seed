@@ -2,11 +2,6 @@
 
 This is a basic [AngularJS](http://angularjs.org) project like the original angular-seed. It was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor), [grunt-interfake](https://github.com/Horsed/grunt-interfake) and [scss-lint](https://github.com/causes/scss-lint) added.
 
-* fix interfake logging
-* make interfake optional
-* bower doc
-* yeoman doc
-
 ## Installation
 
 Stuff to install:
@@ -32,35 +27,35 @@ Now clone this repository or [download](https://github.com/Horsed/angular-seed/a
 
 ## Development environment
 
-The frontend can be served by a local webserver that supports livereload. This also includes a fake backend server so you don't have to mock data in your frontend code. There also is a unit test and e2e test config set up so you can run tests from the beginning. Since the project was generated using generator-angular you can safely scaffold using [generator-angular](https://github.com/yeoman/generator-angular#generators).
+The frontend can be served by a local webserver that supports livereload. This also includes a fake backend server. There also is a unit test and e2e test config set up so you can run tests from the beginning.
 
 ### Server with livereload and faked backend
 
-```grunt serve``` starts a _connect_ server at _localhost:8080_ that serves the static frontend files with livereload capability. To start it with the fake backend execute ```grunt serve:withFakeBackend```. A proxy will forward all requests going to _localhost:8080_ that start with ```/rest/``` to the fake backend server running at _localhost:9000_. To change this url pattern go to _config/custom-grunt.js_. Note that the fake backend will not be started with livereload capability.
+```$ grunt serve``` starts a ```connect``` server at ```localhost:8080``` that serves the frontend with livereload capability. To start this server along with the fake backend execute ```$ grunt serve:withFakeBackend```. A proxy will forward all requests going to ```localhost:8080``` that start with ```/rest/``` to the fake backend server running at ```localhost:9000```. To change this url pattern go to ```config/custom-grunt.js```. Note that the fake backend will not be started with livereload capability.
 
 ### Unit tests
 
-```grunt test``` executes unit tests with an autowatch (whenever a unit or unit test changes).
+```$ grunt test``` executes unit tests with autowatch (re-executes the tests whenever a unit or unit test changes).
 
-```grunt test:singleRun``` runs the unit tests just once.
+```$ grunt test:singleRun``` runs the unit tests just once.
 
-Unit tests are executed with [karma](https://github.com/karma-runner/karma) which is configured to run the tests in [PhantomJS](http://phantomjs.org/). Karma will launch a server at _localhost:7070_.
+Unit tests are executed with [karma](https://github.com/karma-runner/karma) which is configured to run the tests in [PhantomJS](http://phantomjs.org/). See ```karma.conf.js``` to change this. Karma will launch a server at ```localhost:7070```.
 
 ### E2E tests
 
-Run ```webdriver-manager start``` in a separate terminal and then ```grunt e2e:test/local.js```. Of course you can provide you own test config file.
+Run ```webdriver-manager start``` in a separate terminal and then ```$ grunt e2e:test/local.js```. Of course you can provide you own test config file.
 
 E2E tests are based on [protractor](https://github.com/angular/protractor) which is based on [WebDriverJs](https://code.google.com/p/selenium/wiki/WebDriverJs). Don't worry, protractor will setup Selenium for you :-)
 
-The webdriver-manager will setup a local Selenium server at _localhost:4444_.
+The webdriver-manager will setup a local Selenium server at ```localhost:4444```.
 
 ## Build
 
-```grunt build``` builds the project. Take a look at _Gruntfile.js_ to see what is included in the build.
+```$ grunt build``` builds the project. Take a look at ```Gruntfile.js``` to see what is included in the build.
 
-The built frontend will be writted to _dist/_ and this folder will be zipped to _dist.zip_.
+The built frontend will be writted to ```dist/``` and this folder will be zipped to ```dist.zip```.
 
-```grunt serve:dist``` builds the project and then serves the built frontend at _localhost:8080_ (without the fake backend).
+```$ grunt serve:dist``` builds the project and then serves the built frontend at ```localhost:8080``` (without the fake backend).
 
 ## Conventions
 

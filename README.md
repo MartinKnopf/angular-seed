@@ -51,9 +51,9 @@ Unit tests are executed with [karma](https://github.com/karma-runner/karma) whic
 
 ### E2E tests
 
-Run ```webdriver-manager start``` in a separate terminal and then ```$ grunt e2e:test/local.js```. Of course you can provide you own test config file.
+Run ```webdriver-manager start``` in a separate terminal and then ```$ protractor test/local.js```.
 
-E2E tests are based on [protractor](https://github.com/angular/protractor) which is based on [WebDriverJs](https://code.google.com/p/selenium/wiki/WebDriverJs). Don't worry, protractor will setup Selenium for you :-)
+E2E tests are based on [protractor](https://github.com/angular/protractor) which is based on [WebDriverJs](https://code.google.com/p/selenium/wiki/WebDriverJs). With that you can start writing E2E tests for Selenium from the beginning.
 
 The webdriver-manager will setup a local Selenium server at ```localhost:4444```.
 

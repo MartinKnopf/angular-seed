@@ -364,11 +364,6 @@ module.exports = function (grunt) {
     },
 
     exec: {
-      protractor: {
-        cmd: function(testConfig) {
-          return 'protractor ' + testConfig;
-        }
-      },
       scsslint: {
         cmd: function() {
           return 'scss-lint app/styles/** -c scss-lint.yml';
@@ -491,12 +486,6 @@ module.exports = function (grunt) {
     tasks.push(singleRun ? 'karma:single' : 'karma:unit');
 
     grunt.task.run(tasks);
-  });
-
-  grunt.registerTask('e2e', 'Runs the e2e tests with protractor', function(testConfig) {
-    grunt.task.run([
-      'exec:protractor:' + testConfig,
-    ]);
   });
 
   grunt.registerTask('build', [

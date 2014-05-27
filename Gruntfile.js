@@ -52,10 +52,6 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
-      jsTest: {
-        files: ['test/spec/**/*.js'],
-        tasks: ['newer:jshint:test', 'karma']
-      },
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
         tasks: ['exec:scsslint', 'compass:server', 'autoprefixer']

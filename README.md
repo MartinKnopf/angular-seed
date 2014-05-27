@@ -1,6 +1,14 @@
 # Project setup
 
-This is a basic [AngularJS](http://angularjs.org) project like the original angular-seed. It was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor), [grunt-interfake](https://github.com/Horsed/grunt-interfake) and [scss-lint](https://github.com/causes/scss-lint) added.
+From the original [angular-seed](https://github.com/angular/angular-seed#angular-seed--the-seed-for-angularjs-apps):
+
+> This project is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.
+
+> The seed contains a sample AngularJS application and is preconfigured to install the Angular framework and a bunch of development and testing tools for instant web development gratification.
+
+> The seed app doesn't do much, just shows how to wire two controllers and views together.
+
+This project skeleton was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor), [grunt-interfake](https://github.com/Horsed/grunt-interfake) and [scss-lint](https://github.com/causes/scss-lint) added. It also implements some best practices like [the modular organization](http://blog.safaribooksonline.com/2014/03/27/13-step-guide-angularjs-modularization/) and [SMACSS+BEM](https://medium.com/objects-in-space/f6f404727).
 
 ## Installation
 
@@ -57,27 +65,37 @@ The built frontend will be writted to ```dist/``` and this folder will be zipped
 
 ```$ grunt serve:dist``` builds the project and then serves the built frontend at ```localhost:8080``` (without the fake backend).
 
-## Conventions
+## Best practices
 
 Here you can find some conventions I chose for my AngularJS projects. It's all about modularization. If you want to learn AngularJS, take look at [this collection of tutorials](http://www.thinkster.io/angularjs/GtaQ0oMGIl/a-better-way-to-learn-angularjs) (by thinkster.io).
 
-### AngularJS
+### Modular AngularJS organization
 
 See [13 Steps to AngularJS Modularization](http://blog.safaribooksonline.com/2014/03/27/13-step-guide-angularjs-modularization/) (by Christopher Hiller)
 
 A modular file structure:
 
     app
-    |____scripts
-    | |____homepage
-    |   |____homepage.ctrl.js
-    |   |____homepage.module.js
-    |   |____foo.ctrl.js
-    |   |____bar.service.js
-    |   |____baz.directive.js
-    |____myapp.module.js
-    |____myapp.config.js
+    |--scripts
+    |  |--homepage
+    |  |  |--homepage.config.js
+    |  |  |--homepage.ctrl.js
+    |  |  |--homepage.directive.js
+    |  |  |--homepage.module.js
+    |  |  |--...
+    |  |--common
+    |  |  |--directives
+    |  |  |--services
+    |  |  |--filters
+    |  |  |--...
+    |  |--myapp.module.js
+    |  |--myapp.config.js
+    |--index.html
 
-### CSS
+### SMACSS+BEM
 
 For a modular CSS/SASS file structure see [cheat sheet for smacss with sass and bem](http://horsed.github.io/smacss-with-sass-and-bem-cheat-sheet/) (by me).
+
+### E2E tests with page objects
+
+The protractor doc [recommends](https://github.com/angular/protractor/blob/master/docs/getting-started.md#organizing-real-tests-page-objects) that you should make use of the Page Object pattern in your E2E tests to make them more readable. Take a loook at [the sample test](https://github.com/Horsed/angular-seed/blob/master/test/e2e/homepage.test.js) provided in this project. It uses a Page Object so you can get started with that.

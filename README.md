@@ -39,7 +39,7 @@ The frontend can be served by a local webserver that supports livereload. This a
 
 ### Server with livereload and faked backend
 
-```$ grunt serve``` starts a ```connect``` server at ```localhost:8080``` that serves the frontend with livereload capability. To start this server along with the fake backend execute ```$ grunt serve:withFakeBackend```. A proxy will forward all requests going to ```localhost:8080``` that start with ```/rest/``` to the fake backend server running at ```localhost:9000```. To change this url pattern go to ```config/custom-grunt.js```. Note that the fake backend will not be started with livereload capability.
+```$ grunt serve``` starts a ```connect``` server at ```localhost:8080``` that serves the frontend with livereload capability. To start this server along with the fake backend execute ```$ grunt serve:withFakeBackend```. A proxy will forward all requests going to ```localhost:8080``` that start with ```/rest/``` to the fake backend server running at ```localhost:9000```. You can change this url pattern in ```Gruntfile.js```. Note that the fake backend will not be started with livereload capability.
 
 ### Unit tests
 
@@ -51,7 +51,7 @@ Unit tests are executed with [karma](https://github.com/karma-runner/karma) whic
 
 ### E2E tests
 
-Run ```webdriver-manager start``` in a separate terminal and then ```$ protractor test/local.js```.
+Run ```webdriver-manager start``` in a separate terminal and then ```$ protractor test/e2e/local.js```.
 
 E2E tests are based on [protractor](https://github.com/angular/protractor) which is based on [WebDriverJs](https://code.google.com/p/selenium/wiki/WebDriverJs). With that you can start writing E2E tests for Selenium from the beginning.
 
@@ -99,3 +99,8 @@ For a modular CSS/SASS file structure see [cheat sheet for smacss with sass and 
 ### E2E tests with page objects
 
 The protractor doc [recommends](https://github.com/angular/protractor/blob/master/docs/getting-started.md#organizing-real-tests-page-objects) that you should make use of the Page Object pattern in your E2E tests to make them more readable. Take a loook at [the sample test](https://github.com/Horsed/angular-seed/blob/master/test/e2e/homepage.test.js) provided in this project. It uses a Page Object so you can get started with that.
+
+These are the naming conventions for E2E test files:
+* *for protractor config files*: ```test/e2e/local.js```
+* *for environment specific page objects*: ```test/e2e/homepage/homepage.page.local.js```
+* *for test files*: ```test/e2e/homepage/homepage.js```

@@ -9,10 +9,13 @@ exports.config = {
   },
 
   baseUrl: 'http://localhost:8080',
+  params: {
+    environment: 'local',
+  },
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  specs: ['e2e/**/*.js'],
+  specs: ['**/*.js'],
 
   // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {

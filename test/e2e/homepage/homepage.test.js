@@ -1,8 +1,7 @@
-var Homepage = require('./homepage');
-
 describe('[homepage.test.js] Homepage', function() {
 
-  var homepage = new Homepage();
+  var Homepage = require('./homepage.page.' + protractor.getInstance().params.environment)
+    , homepage = new Homepage();
 
   beforeEach(function() {
     homepage.get();

@@ -467,25 +467,8 @@ module.exports = function (grunt) {
     return grunt.task.run(tasks);
   });
 
-  grunt.registerTask('test', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma:unit'
-  ]);
-
   grunt.registerTask('test', 'Runs the unit tests with karma', function(singleRun) {
-    var tasks = [
-      'clean:server',
-      'concurrent:test',
-      'autoprefixer',
-      'connect:test'
-    ];
-
-    tasks.push(singleRun ? 'karma:single' : 'karma:unit');
-
-    grunt.task.run(tasks);
+    grunt.task.run(singleRun ? ['karma:single'] : ['karma:unit']);
   });
 
   grunt.registerTask('build', [

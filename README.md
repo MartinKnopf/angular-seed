@@ -1,4 +1,4 @@
-# Project setup
+# Project setup 
 
 From the original [angular-seed](https://github.com/angular/angular-seed#angular-seed--the-seed-for-angularjs-apps):
 

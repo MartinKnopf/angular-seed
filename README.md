@@ -24,7 +24,7 @@ Stuff to install:
 
 With Node and npm ready you can install the following:
 
-    $ npm install yeoman -g                   # for scaffolding
+    $ npm install yo -g                       # for scaffolding
     $ npm install protractor -g               # for e2e tests based on Selenium WebDriverJS
     $ webdriver-manager update --standalone   # downloads the selenium server and chromedriver
 

@@ -96,7 +96,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9001,
+          port: 32187,
           base: [
             '.tmp',
             'test',
@@ -130,6 +130,10 @@ module.exports = function (grunt) {
         reporter: require('jshint-stylish')
       },
       all: [
+<<<<<<< HEAD
+=======
+        'Gruntfile.js',
+>>>>>>> b902269c6d567fe0a53ce1278e4f76eb99d0d2f2
         '<%= yeoman.app %>/scripts/**/*.js'
       ],
       test: {
@@ -388,8 +392,13 @@ module.exports = function (grunt) {
       },
       watchAndInterfake: {
         tasks: [
+<<<<<<< HEAD
           'interfake',
           'watch'
+=======
+          'watch',
+          'interfake'
+>>>>>>> b902269c6d567fe0a53ce1278e4f76eb99d0d2f2
         ],
         options: {
           logConcurrentOutput: true
@@ -488,6 +497,18 @@ module.exports = function (grunt) {
       };
     }
 
+<<<<<<< HEAD
+=======
+    var tasks = [
+      'clean:server',
+      'concurrent:server',
+      'autoprefixer',
+      'connect:livereload'
+    ];
+
+    tasks.push(target === 'withFakeBackend' ? 'concurrent:watchAndInterfake' : 'watch');
+
+>>>>>>> b902269c6d567fe0a53ce1278e4f76eb99d0d2f2
     return grunt.task.run(tasks);
   });
 

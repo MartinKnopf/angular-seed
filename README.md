@@ -1,4 +1,4 @@
-# Project setup
+# Project setup 
 
 From the original [angular-seed](https://github.com/angular/angular-seed#angular-seed--the-seed-for-angularjs-apps):
 
@@ -24,7 +24,7 @@ Stuff to install:
 
 With Node and npm ready you can install the following:
 
-    $ npm install yeoman -g                   # for scaffolding
+    $ npm install yo -g                       # for scaffolding
     $ npm install protractor -g               # for e2e tests based on Selenium WebDriverJS
     $ webdriver-manager update --standalone   # downloads the selenium server and chromedriver
 
@@ -35,25 +35,23 @@ Now clone this repository or [download](https://github.com/Horsed/angular-seed/a
 
 ## Development environment
 
-The frontend can be served by a local webserver that supports livereload and forwards requests starting with ```/rest``` to either a fake backend server (```localhost:9000```) or ```(localhost:8080)```. There also is a unit test and e2e test config set up so you can run tests from the beginning.
+The frontend can be served by a local webserver that supports livereload. This also includes a fake backend server. There also is a unit test and e2e test config set up so you can run tests from the beginning.
 
 ### Server with livereload and faked backend
 
-Run ```$ grunt serve``` to start a server at ```localhost:8088``` that serves the frontend with livereload capability and forwarding to the ```localhost:8080```.
-
-To start this server along with the fake backend execute ```$ grunt serve:withFakeBackend```. Note that the fake backend will not be started with livereload capability.
+```$ grunt serve``` starts a ```connect``` server at ```localhost:8088``` that serves the frontend with livereload capability. To start this server along with the fake backend execute ```$ grunt serve:withFakeBackend```. A proxy will forward all requests going to ```localhost:8088``` that start with ```/rest/``` to the fake backend server running at ```localhost:9000```. You can change this url pattern in ```Gruntfile.js```. Note that the fake backend will not be started with livereload capability.
 
 ### Unit tests
 
-Run ```$ grunt test``` to execute unit tests with autowatch (re-executes the tests whenever a unit or unit test changes).
+```$ grunt test``` executes unit tests with autowatch (re-executes the tests whenever a unit or unit test changes).
 
-Run ```$ grunt test:singleRun``` to run the unit tests just once.
+```$ grunt test:singleRun``` runs the unit tests just once.
 
 Unit tests are executed with [karma](https://github.com/karma-runner/karma) which is configured to run the tests in [PhantomJS](http://phantomjs.org/). See ```karma.conf.js``` to change this. Karma will launch a server at ```localhost:7070```.
 
 ### E2E tests
 
-Run ```webdriver-manager start``` in a separate terminal and then ```$ protractor test/e2e/local-withFakeBackend.js```.
+Run ```webdriver-manager start``` in a separate terminal and then ```$ protractor test/e2e/local.js```.
 
 E2E tests are based on [protractor](https://github.com/angular/protractor) which is based on [WebDriverJs](https://code.google.com/p/selenium/wiki/WebDriverJs). With that you can start writing E2E tests for Selenium from the beginning.
 
@@ -61,11 +59,11 @@ The webdriver-manager will setup a local Selenium server at ```localhost:4444```
 
 ## Build
 
-Run ```$ grunt build``` to build the project. Take a look at ```Gruntfile.js``` to see what is included in the build.
+```$ grunt build``` builds the project. Take a look at ```Gruntfile.js``` to see what is included in the build.
 
 The built frontend will be writted to ```dist/``` and this folder will be zipped to ```dist.zip```.
 
-Run ```$ grunt serve:dist``` to build the project and then serve it at ```localhost:8088``` (again with forwarding to ```localhost:8080```).
+```$ grunt serve:dist``` builds the project and then serves the built frontend at ```localhost:8088``` (without the fake backend).
 
 ## Best practices
 
@@ -100,9 +98,9 @@ For a modular CSS/SASS file structure see [cheat sheet for smacss with sass and 
 
 ### E2E tests with page objects
 
-The protractor doc [recommends](https://github.com/angular/protractor/blob/master/docs/getting-started.md#organizing-real-tests-page-objects) that you should make use of the Page Object pattern in E2E tests to make those more readable.
+The protractor doc [recommends](https://github.com/angular/protractor/blob/master/docs/getting-started.md#organizing-real-tests-page-objects) that you should make use of the Page Object pattern in your E2E tests to make them more readable. Take a loook at [the sample test](https://github.com/Horsed/angular-seed/blob/master/test/e2e/homepage.test.js) provided in this project. It uses a Page Object so you can get started with that.
 
 These are the naming conventions for E2E test files:
 * *for protractor config files*: ```test/e2e/local.js```
-* *for environment specific page objects*: ```test/e2e/groups/groups.page.local.js```
-* *for test files*: ```test/e2e/groups/groups.js```
+* *for environment specific page objects*: ```test/e2e/homepage/homepage.page.local.js```
+* *for test files*: ```test/e2e/homepage/homepage.js```

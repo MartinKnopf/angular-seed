@@ -1,5 +1,6 @@
 install:
   - npm install -g bower
+  - npm install
 
 language: node_js
 node_js:

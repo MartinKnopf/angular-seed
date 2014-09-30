@@ -1,3 +1,6 @@
+'use strict';
+/* global protractor*/
+
 describe('[homepage.test.js] Homepage', function() {
 
   var Homepage = require('./homepage.page.' + protractor.getInstance().params.environment)

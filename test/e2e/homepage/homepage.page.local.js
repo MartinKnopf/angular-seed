@@ -1,7 +1,10 @@
-module.exports = Homepage;
+'use strict';
+/* global protractor, element, by */
 
 function Homepage() {
 }
+
+module.exports = Homepage;
 
 Homepage.prototype.get = function() {
   var ptor = protractor.getInstance();

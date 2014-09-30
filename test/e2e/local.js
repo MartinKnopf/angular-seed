@@ -8,7 +8,7 @@ exports.config = {
     'browserName': 'chrome'
   },
 
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'http://localhost:8088',
   params: {
     environment: 'local',
   },

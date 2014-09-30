@@ -1,16 +1,25 @@
 # Project setup
 
-This project was generated with [generator-angular](https://github.com/yeoman/generator-angular). I added [protractor](https://github.com/angular/protractor) and [grunt-interfake](https://github.com/Horsed/grunt-interfake).
+From the original [angular-seed](https://github.com/angular/angular-seed#angular-seed--the-seed-for-angularjs-apps):
+
+> This project is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.
+
+> The seed contains a sample AngularJS application and is preconfigured to install the Angular framework and a bunch of development and testing tools for instant web development gratification.
+
+> The seed app doesn't do much, just shows how to wire two controllers and views together.
+
+This project skeleton was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor), [grunt-interfake](https://github.com/Horsed/grunt-interfake) and [scss-lint](https://github.com/causes/scss-lint) added. It also implements some best practices like [the modular organization](http://blog.safaribooksonline.com/2014/03/27/13-step-guide-angularjs-modularization/) and [SMACSS+BEM](https://medium.com/objects-in-space/f6f404727).
 
 ## Installation
 
 Stuff to install:
 
-* Node.js
-* Python 2.7.x
-* Ruby
-* rubygems
-* compass
+* [Node.js](http://nodejs.org)
+* [Python 2.7.x](https://www.python.org/downloads/)
+* [Ruby](https://www.ruby-lang.org/en/downloads/)
+* [rubygems](https://rubygems.org/)
+* [compass](https://rubygems.org/gems/compass)
+* [scss-lint](https://rubygems.org/gems/scss-lint)
 * On Windows 7: [Microsoft Visual Studio C++ 2012 for Windows Desktop Express](http://go.microsoft.com/?linkid=9816758)
 
 With Node and npm ready you can install the following:
@@ -26,84 +35,74 @@ Now clone this repository or [download](https://github.com/Horsed/angular-seed/a
 
 ## Development environment
 
-This angular project has some nice features to support the developer. The frontend can be served by a local webserver that supports livereload. This also includes a fake backend server so you don't have to mock data in your frontend code. There also is a unit test and e2e test config setted up so you can run tests easily.
+The frontend can be served by a local webserver that supports livereload and forwards requests starting with ```/rest``` to either a fake backend server (```localhost:9000```) or ```(localhost:8080)```. There also is a unit test and e2e test config set up so you can run tests from the beginning.
 
 ### Server with livereload and faked backend
 
-    $ grunt serve
+Run ```$ grunt serve``` to start a server at ```localhost:8088``` that serves the frontend with livereload capability and forwarding to the ```localhost:8080```.
 
-This starts two servers:
-  * a ```connect``` server at ```localhost:8080``` that serves the static frontend files with livereload capability
-  * a fake backend server at ```localhost:9000``` that handles requests defined in ```fake-backend.json```
-
-A proxy will forward all requests to ```localhost:8080``` that start with ```/rest/``` to the fake backend server.
+To start this server along with the fake backend execute ```$ grunt serve:withFakeBackend```. Note that the fake backend will not be started with livereload capability.
 
 ### Unit tests
 
-    $ grunt test
+Run ```$ grunt test``` to execute unit tests with autowatch (re-executes the tests whenever a unit or unit test changes).
 
-Unit tests will be executed with an autowatch (whenever a unit or unit test changes). To run the unit tests once execute:
+Run ```$ grunt test:singleRun``` to run the unit tests just once.
 
-    $ grunt test:singleRun
-
-Unit tests are executed with [karma](https://github.com/karma-runner/karma) which is configured to run the tests in [PhantomJS](http://phantomjs.org/). Karma will launch a server at ```localhost:7070```.
+Unit tests are executed with [karma](https://github.com/karma-runner/karma) which is configured to run the tests in [PhantomJS](http://phantomjs.org/). See ```karma.conf.js``` to change this. Karma will launch a server at ```localhost:7070```.
 
 ### E2E tests
 
-    $ webdriver-manager start
-    $ grunt e2e:test/local.js
+Run ```webdriver-manager start``` in a separate terminal and then ```$ protractor test/e2e/local-withFakeBackend.js```.
 
-E2E tests are based on [protractor](https://github.com/angular/protractor) which is based on [WebDriverJs](https://code.google.com/p/selenium/wiki/WebDriverJs). Don't worry, protractor will setup Selenium for you :-)
+E2E tests are based on [protractor](https://github.com/angular/protractor) which is based on [WebDriverJs](https://code.google.com/p/selenium/wiki/WebDriverJs). With that you can start writing E2E tests for Selenium from the beginning.
 
-First start the webdriver-manager. This will setup a local Selenium server at ```localhost:4444```. Then execute the e2e test.
+The webdriver-manager will setup a local Selenium server at ```localhost:4444```.
 
 ## Build
 
-    $ grunt build
+Run ```$ grunt build``` to build the project. Take a look at ```Gruntfile.js``` to see what is included in the build.
 
-Building this project includes:
+The built frontend will be writted to ```dist/``` and this folder will be zipped to ```dist.zip```.
 
-* clean:dist
-* bowerInstall
-* useminPrepare
-* concurrent:dist
-* autoprefixer
-* concat
-* ngmin
-* copy:dist
-* cdnify
-* cssmin
-* uglify
-* rev
-* usemin
-* htmlmin
-* compress
+Run ```$ grunt serve:dist``` to build the project and then serve it at ```localhost:8088``` (again with forwarding to ```localhost:8080```).
 
-The built frontend will be writted to ```dist/``` and this folder will be zipped to ```dist.zip```
+## Best practices
 
-To take a look at the built project in the browser (again at ```localhost:8080```):
+Here you can find some conventions I chose for my AngularJS projects. It's all about modularization. If you want to learn AngularJS, take look at [this collection of tutorials](http://www.thinkster.io/angularjs/GtaQ0oMGIl/a-better-way-to-learn-angularjs) (by thinkster.io).
 
-    $ grunt serve:dist
+### Modular AngularJS organization
 
-## Conventions
+See [13 Steps to AngularJS Modularization](http://blog.safaribooksonline.com/2014/03/27/13-step-guide-angularjs-modularization/) (by Christopher Hiller)
 
-### AngularJS
-
-see [13 Steps to AngularJS Modularization](http://blog.safaribooksonline.com/2014/03/27/13-step-guide-angularjs-modularization/)
-
-File structure
+A modular file structure:
 
     app
-    |____scripts
-    | |____homepage
-    |   |____homepage.ctrl.js
-    |   |____homepage.module.js
-    |   |____foo.ctrl.js
-    |   |____bar.service.js
-    |   |____baz.directive.js
-    |____myapp.module.js
-    |____myapp.config.js
+    |--scripts
+    |  |--homepage
+    |  |  |--homepage.config.js
+    |  |  |--homepage.ctrl.js
+    |  |  |--homepage.directive.js
+    |  |  |--homepage.module.js
+    |  |  |--...
+    |  |--common
+    |  |  |--directives
+    |  |  |--services
+    |  |  |--filters
+    |  |  |--...
+    |  |--myapp.module.js
+    |  |--myapp.config.js
+    |--index.html
 
-### CSS
+### SMACSS+BEM
 
-see [cheat sheet for smacss with sass and bem](http://horsed.github.io/smacss-with-sass-and-bem-cheat-sheet/)
+For a modular CSS/SASS file structure see [cheat sheet for smacss with sass and bem](http://horsed.github.io/smacss-with-sass-and-bem-cheat-sheet/) (by me).
+
+### E2E tests with page objects
+
+The protractor doc [recommends](https://github.com/angular/protractor/blob/master/docs/getting-started.md#organizing-real-tests-page-objects) that you should make use of the Page Object pattern in E2E tests to make those more readable.
+
+These are the naming conventions for E2E test files:
+* *for protractor config files*: ```test/e2e/local.js```
+* *for environment specific page objects*: ```test/e2e/groups/groups.page.local.js```
+* *for test files*: ```test/e2e/groups/groups.js```

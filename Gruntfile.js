@@ -16,18 +16,19 @@ module.exports = function (grunt) {
 
   // forward requests to fake backend
   var httpProxy = require('http-proxy'),
-      proxy = new httpProxy.RoutingProxy(),
-      proxyFunction = function (req, res, next) {
-        var match = req.url.toString().match(/.*\/rest\/.*/);
-        if (match) {
-          proxy.proxyRequest(req, res, {
-            host: 'localhost',
-            port: 9000
-          });
-        } else {
-          next();
-        }
-      };
+    proxy = new httpProxy.RoutingProxy(),
+    backend = {
+      host: 'localhost',
+      port: 9000
+    },
+    proxyFunction = function (req, res, next) {
+      var match = req.url.toString().match(/.*\/rest.*/);
+      if (match) {
+        proxy.proxyRequest(req, res, backend);
+      } else {
+        next();
+      }
+    };
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -35,6 +36,7 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: {
       // configurable paths
+      test: 'test',
       app: require('./bower.json').appPath || 'app',
       dist: 'dist'
     },
@@ -46,19 +48,15 @@ module.exports = function (grunt) {
         tasks: ['bowerInstall']
       },
       js: {
-        files: ['<%= yeoman.app %>/**/*.js'],
-        tasks: ['newer:jshint:all'],
+        files: ['<%= yeoman.app %>/**/*.js', '<%= yeoman.test %>/**/*.js'],
+        tasks: ['newer:jshint'],
         options: {
           livereload: true
         }
       },
-      jsTest: {
-        files: ['test/spec/**/*.js'],
-        tasks: ['newer:jshint:test', 'karma']
-      },
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
-        tasks: ['compass:server', 'autoprefixer']
+        tasks: ['exec:scsslint', 'compass:server', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -78,14 +76,14 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 8080,
+        port: 8088,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
       },
       livereload: {
         options: {
-          open: true,
+          open: false,
           base: [
             '.tmp',
             '<%= yeoman.app %>'
@@ -108,7 +106,11 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          base: '<%= yeoman.dist %>'
+          base: '<%= yeoman.dist %>',
+           middleware: function(connect, options, middlewares) {
+             middlewares.push(proxyFunction);
+             return middlewares;
+           }
         }
       }
     },
@@ -128,14 +130,13 @@ module.exports = function (grunt) {
         reporter: require('jshint-stylish')
       },
       all: [
-        'Gruntfile.js',
-        '<%= yeoman.app %>/**/*.js'
+        '<%= yeoman.app %>/scripts/**/*.js'
       ],
       test: {
         options: {
-          jshintrc: 'test/.jshintrc'
+          jshintrc: '<%= yeoman.test %>/.jshintrc'
         },
-        src: ['test/spec/**/*.js']
+        src: ['<%= yeoman.test %>/**/*.js']
       }
     },
 
@@ -149,7 +150,10 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*'
           ]
-        }]
+        }],
+        options: {
+          force: true
+        }
       },
       server: '.tmp'
     },
@@ -215,10 +219,7 @@ module.exports = function (grunt) {
       dist: {
         files: {
           src: [
-            '<%= yeoman.dist %>/**/*.js',
-            '<%= yeoman.dist %>/styles/**/*.css',
-            '<%= yeoman.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= yeoman.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
           ]
         }
       }
@@ -249,13 +250,6 @@ module.exports = function (grunt) {
       css: ['<%= yeoman.dist %>/styles/**/*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>']
-      }
-    },
-
-    // The following *-min tasks produce minified files in the dist folder
-    cssmin: {
-      options: {
-        root: '<%= yeoman.app %>'
       }
     },
 
@@ -344,7 +338,7 @@ module.exports = function (grunt) {
           expand: true,
           flatten: true,
           cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap',
+          dest: '<%= yeoman.dist %>/styles/fonts',
           src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*']
         }]
       },
@@ -353,7 +347,14 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '**/*.css'
-      }
+      },
+      fonts: {
+          expand: true,
+          flatten: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '.tmp/styles/fonts',
+          src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*']
+        }
     },
 
     compress: {
@@ -368,32 +369,50 @@ module.exports = function (grunt) {
     },
 
     exec: {
-      protractor: {
-        cmd: function(testConfig) {
-          return 'protractor ' + testConfig;
+      scsslint: {
+        cmd: function() {
+          return 'scss-lint app/styles/** -c scss-lint.yml';
         }
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      server: [
-        'compass:server'
-      ],
-      livereload: [
-        'connect:livereload'
-      ],
-      interfake: [
-        'interfake'
-      ],
-      test: [
-        'compass'
-      ],
-      dist: [
-        'compass:dist',
-        'imagemin',
-        'svgmin'
-      ]
+      server: {
+        tasks: [
+          'compass:server'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      watchAndInterfake: {
+        tasks: [
+          'interfake',
+          'watch'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      test: {
+        tasks: [
+          'compass'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      dist: {
+        tasks: [
+          'compass:dist',
+          'imagemin',
+          'svgmin'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
     },
 
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
@@ -437,54 +456,49 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('serve', function (target) {
+    var tasks = [];
+
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      tasks = ['build', 'connect:dist:keepalive'];
+      backend = {
+        host: '127.0.0.1',
+        port: 8080
+      };
+    } else if(target === 'withFakeBackend') {
+      tasks = [
+        'clean:server',
+        'copy:fonts',
+        'concurrent:server',
+        'autoprefixer',
+        'connect:livereload',
+        'concurrent:watchAndInterfake'
+      ];
+    } else {
+      tasks = [
+        'clean:server',
+        'copy:fonts',
+        'concurrent:server',
+        'autoprefixer',
+        'connect:livereload',
+        'watch'
+      ];
+      backend = {
+        host: '127.0.0.1',
+        port: 8080
+      };
     }
 
-    grunt.task.run([
-      'clean:server',
-      'bowerInstall',
-      'concurrent:server',
-      'autoprefixer',
-      'connect:livereload',
-      'watch',
-      'concurrent:interfake'
-    ]);
+    return grunt.task.run(tasks);
   });
-
-  grunt.registerTask('server', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
-
-  grunt.registerTask('test', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma:unit'
-  ]);
 
   grunt.registerTask('test', 'Runs the unit tests with karma', function(singleRun) {
-    var tasks = [
-      'clean:server',
-      'concurrent:test',
-      'autoprefixer',
-      'connect:test'
-    ];
-
-    tasks.push(singleRun ? 'karma:single' : 'karma:unit');
-
-    grunt.task.run(tasks);
-  });
-
-  grunt.registerTask('e2e', 'Runs the e2e tests with protractor', function(testConfig) {
-    grunt.task.run([
-      'exec:protractor:' + testConfig,
-    ]);
+    grunt.task.run(singleRun ? ['karma:single'] : ['karma:unit']);
   });
 
   grunt.registerTask('build', [
+    'newer:jshint',
+    'exec:scsslint',
+    'test:single',
     'clean:dist',
     'bowerInstall',
     'useminPrepare',
@@ -503,8 +517,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
     'build'
   ]);
 };

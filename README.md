@@ -1,6 +1,7 @@
 # AngularJS template project
 
 [![devDependency Status](https://david-dm.org/Horsed/angular-seed/dev-status.svg?style=flat-square)](https://david-dm.org/Horsed/angular-seed#info=devDependencies)
+[![build Status](https://travis-ci.org/Horsed/angular-seed.svg)](https://travis-ci.org/Horsed/angular-seed)
 
 From the original [angular-seed](https://github.com/angular/angular-seed#angular-seed--the-seed-for-angularjs-apps):
 

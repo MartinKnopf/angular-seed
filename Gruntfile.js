@@ -339,7 +339,7 @@ module.exports = function (grunt) {
           flatten: true,
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>/styles/fonts',
-          src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*']
+          src: ['bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*']
         }]
       },
       styles: {
@@ -353,7 +353,7 @@ module.exports = function (grunt) {
           flatten: true,
           cwd: '<%= yeoman.app %>',
           dest: '.tmp/styles/fonts',
-          src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*']
+          src: ['bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*']
         }
     },
 

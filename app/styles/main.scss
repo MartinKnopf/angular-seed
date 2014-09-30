@@ -1,9 +1,9 @@
 $icon-font-path: '/styles/fonts/'; // bootstrap fonts get copied here from /bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/
 
-@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
 
 // bower:scss
-@import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
 
 @import 'base/base';

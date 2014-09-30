@@ -10,7 +10,7 @@ From the original [angular-seed](https://github.com/angular/angular-seed#angular
 
 This project skeleton was generated with [generator-angular](https://github.com/yeoman/generator-angular) and got [protractor](https://github.com/angular/protractor), [grunt-interfake](https://github.com/Horsed/grunt-interfake) and [scss-lint](https://github.com/causes/scss-lint) added. It also implements some best practices like [the modular organization](http://blog.safaribooksonline.com/2014/03/27/13-step-guide-angularjs-modularization/) and [SMACSS+BEM](https://medium.com/objects-in-space/f6f404727).
 
-[![dependencies](https://david-dm.org/Horsed/angular-seed.svg?theme=shields.io)](https://david-dm.org/Horsed/angular-seed)
+[![dependencies](https://david-dm.org/Horsed/angular-seed.png)](https://david-dm.org/Horsed/angular-seed)
 
 ## Installation
 

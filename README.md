@@ -101,7 +101,7 @@ For a modular CSS/SASS file structure see [cheat sheet for smacss with sass and 
 
 ### E2E tests with page objects
 
-The protractor doc [recommends](https://github.com/angular/protractor/blob/master/docs/getting-started.md#organizing-real-tests-page-objects) that you should make use of the Page Object pattern in your E2E tests to make them more readable. Take a loook at [the sample test](https://github.com/Horsed/angular-seed/blob/master/test/e2e/homepage.test.js) provided in this project. It uses a Page Object so you can get started with that.
+The protractor doc [recommends](https://github.com/angular/protractor/blob/master/docs/getting-started.md#organizing-real-tests-page-objects) that you should make use of the Page Object pattern in your E2E tests to make them more readable. Take a loook at [the sample test](https://github.com/Horsed/angular-seed/blob/master/test/e2e/homepage/homepage.test.js) provided in this project. It uses a Page Object so you can get started with that.
 
 These are the naming conventions for E2E test files:
 * *for protractor config files*: ```test/e2e/local.js```

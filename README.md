@@ -64,7 +64,7 @@ The webdriver-manager will setup a local Selenium server at ```localhost:4444```
 
 ```$ grunt build``` builds the project. Take a look at ```Gruntfile.js``` to see what is included in the build.
 
-The built frontend will be writted to ```dist/``` and this folder will be zipped to ```dist.zip```.
+The built frontend will be written to ```dist/``` and this folder will be zipped to ```dist.zip```.
 
 ```$ grunt serve:dist``` builds the project and then serves the built frontend at ```localhost:8088``` (without the fake backend).
 
